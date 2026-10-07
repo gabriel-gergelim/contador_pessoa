@@ -40,13 +40,25 @@ class MyApp extends StatelessWidget {
               fontWeight: FontWeight.w700,
             ),
             ),
-            Text('0',
+            Text('',
             style: TextStyle(
               color: Color.fromARGB(255, 4, 87,154),
               fontSize: 26,
               fontWeight: FontWeight.w700
               ),
             ),
+            const Padding(padding: EdgeInsets.all(40),
+            child:Text('0',
+            style: TextStyle(
+              fontSize: 100,
+              color: Color.fromARGB(255, 4, 87,154),
+            ),
+            ),
+            ),
+            
+
+
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -58,11 +70,29 @@ class MyApp extends StatelessWidget {
                     borderRadius: BorderRadius.circular(24),
                   ),
                 ),
-                  child: Text('Sair'),
+                  child: Text('Saiu',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                  ),
+                  ),
                 ),
-                TextButton(onPressed: increment,
-                  child: Text('Entrar'),
-                ),
+                SizedBox(width: 32),
+
+                TextButton(
+                  onPressed: increment,
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    fixedSize: const Size(100, 100),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                  ),
+                  child: const Text(
+                  'Clique aqui',
+                  style: TextStyle( color: Colors.black),
+                    ),
+                  ),
               ],
             ),
           ],
