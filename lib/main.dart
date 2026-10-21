@@ -26,26 +26,33 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int contador = 0;
 
+  bool get isEmpty => contador == 0;
+  bool get isFull => contador == 10;
+
   void decrement() {
-    setState(() {
-      contador--;
-    });
-    print(contador);
+    if (contador > 0) {
+      setState(() {
+        contador--;
+      });
+      print(contador);
+    }
   }
 
   void increment() {
-    setState(() {
-      contador++;
-    });
-    print(contador);
+    if (contador < 10) {
+      setState(() {
+        contador++;
+      });
+      print(contador);
+    }
   }
-
-  // Ajustando
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        width: double.infinity,
+        height: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/image/image.png'),
@@ -55,22 +62,17 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Pode entrar!',
+            Text(
+              isFull ? 'Lotado' : 'Pode entrar!',
               style: TextStyle(
-                color: Color.fromARGB(255, 4, 87, 154),
+                color: isFull ? Colors.red : Colors.blue,
                 fontSize: 24,
                 fontWeight: FontWeight.w700,
               ),
             ),
-            const Text(
-              '',
-              style: TextStyle(
-                color: Color.fromARGB(255, 4, 87, 154),
-                fontSize: 26,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
+
+            const SizedBox(height: 20),
+
             Padding(
               padding: const EdgeInsets.all(40),
               child: Text(
@@ -81,13 +83,15 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                  onPressed: decrement,
+                  onPressed: isEmpty ? null : decrement,
                   style: TextButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor:
+                        isEmpty ? Colors.blue.withOpacity(0.2) : Colors.blue,
                     fixedSize: const Size(100, 100),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24),
@@ -101,11 +105,14 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
+
                 const SizedBox(width: 32),
+
                 TextButton(
-                  onPressed: increment,
+                  onPressed: isFull ? null : increment,
                   style: TextButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor:
+                        isFull ? Colors.blue.withOpacity(0.2) : Colors.blue,
                     fixedSize: const Size(100, 100),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24),
@@ -113,7 +120,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                   child: const Text(
                     'Entrar',
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
                   ),
                 ),
               ],
