@@ -40,6 +40,8 @@ class _HomePageState extends State<HomePage> {
     print(contador);
   }
 
+  // Ajustando
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
